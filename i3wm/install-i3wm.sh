@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/i3wm \n
+cd ~/.dots/i3wm
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/i3wm.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-i3wm.log
 
-# Install deps \n
+# Install deps
 # deps
 

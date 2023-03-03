@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/grub \n
+cd ~/.dots/grub
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/grub.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-grub.log
 
-# Install deps \n
+# Install deps
 # deps
 

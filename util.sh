@@ -111,15 +111,16 @@ install() {
 TEMPLATE=""
 
 template() {
-TEMPLATE="#!/usr/bin/env bash \n
+path=$(basename $1)
+TEMPLATE="#!/usr/bin/env bash 
 
-cd ~/.dots/$1 \n
+cd ~/.dots/$path
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-$1.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-$path.log
 
-# Install deps \n
+# Install deps
 # deps
 "
 }

@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/pacman \n
+cd ~/.dots/pacman
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/pacman.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-pacman.log
 
-# Install deps \n
+# Install deps
 # deps
 
