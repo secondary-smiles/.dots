@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Utility functions
 
@@ -57,6 +57,9 @@ check() {
 # Other Functions #
 ###################
 
+declare -A deps
+INSTALLED=()
+
 deps() {
   log "installing deps: $(echo $@)";
   yay -S $@;
@@ -64,6 +67,7 @@ deps() {
   return 0;
 }
 
+# Symlink + mkdir -p
 link() {
   log "linking $1 to $2";
 
@@ -72,5 +76,28 @@ link() {
   
   ln -sf $1 $2;
   check
+  return 0;
+}
+
+# Run install script
+install() {
+  package=$1;
+  log "installing $package";
+
+  for dep in ${deps[$package]}; do
+    if [[ " ${INSTALLED[*]} " =~ " ${dep} "  ]]; then
+      log "dependency $dep already installed";
+    else
+      warn "dependency $dep not installed. installing.";  
+      install $dep;
+      check;
+    fi
+  done
+
+  /usr/bin/env bash ~/.dots/$package/install-$package.sh;
+  check
+
+  INSTALLED+=($package);
+
   return 0;
 }
