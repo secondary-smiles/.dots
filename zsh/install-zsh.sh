@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd zsh
+cd ~/.dots/zsh
 
 # Utils
-source ./util.sh
+source ~/.dots/util.sh
 logfile install-zsh.log
 
 # Install deps
@@ -35,5 +35,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 check
 
 log "setup zsh dotfiles successfully!"
-
-cd ../
