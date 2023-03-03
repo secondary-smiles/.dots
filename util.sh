@@ -61,3 +61,14 @@ deps() {
   check;
   return 0;
 }
+
+link() {
+  log "linking $1 to $2";
+
+  destdir="${2%/*}/";
+  mkdir -p $destdir;
+  
+  ln -sf $1 $2;
+  check
+  return 0;
+}
