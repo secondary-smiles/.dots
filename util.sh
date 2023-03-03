@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# Utility functions
+
 #####################
 # Logging Functions #
 #####################
@@ -34,7 +38,7 @@ warn() {
 
 error() {
   printf "\x1b[1;31merror:$RESET $1 $RESET\n";
-  printf "[ERR] $1\n" >> $LOGFILE;
+  printf "[ERR]  $1\n" >> $LOGFILE;
   LAST=$1;
   exit 1;
 }
@@ -52,7 +56,7 @@ check() {
 ###################
 
 deps() {
-  log "installing deps..";
+  log "installing deps: $(echo $@)";
   yay -S $@;
   check;
   return 0;
