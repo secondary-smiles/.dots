@@ -82,7 +82,8 @@ link() {
 # Run install script
 install() {
   package=$1;
-  log "installing $package";
+
+  log "checking dependencies '${deps[$package]}'"
 
   for dep in ${deps[$package]}; do
     if [[ " ${INSTALLED[*]} " =~ " ${dep} "  ]]; then
@@ -94,6 +95,7 @@ install() {
     fi
   done
 
+  log "installing $package";
   /usr/bin/env bash ~/.dots/$package/install-$package.sh;
   check
 
