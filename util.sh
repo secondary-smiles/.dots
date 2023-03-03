@@ -18,6 +18,8 @@ LAST=''
 logfile() {
   LOGFILE=$1
   > $LOGFILE;
+  check;
+
   log "set logfile $LOGFILE";
   return 0;
 }
