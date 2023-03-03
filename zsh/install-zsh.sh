@@ -11,7 +11,6 @@ deps zsh curl starship
 
 # install oh-my-zsh
 log "setting up oh-my-zsh.."
-#!/bin/bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 check
 
@@ -22,7 +21,7 @@ check
 
 # link .zshrc file
 log "symlinking .zshrc.."
-ln -sf ~/.dots/zsh/.zshrc ~/.zshrc
+link ~/.dots/zsh/.zshrc ~/.zshrc
 check
 
 # install zsh plugins

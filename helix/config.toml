@@ -1,0 +1,44 @@
+theme = "everforest_dark"
+
+[editor]
+middle-click-paste = false
+line-number = "relative"
+auto-save = true
+auto-format = false
+bufferline = "always"
+color-modes = true
+shell = ["zsh", "-c"]
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+left = ["mode", "file-name"]
+center = ["spinner", "position-percentage", "file-encoding"]
+right = ["diagnostics", "primary-selection-length", "position", "file-type"]
+
+[editor.lsp]
+auto-signature-help = false
+display-signature-help-docs = false
+
+# Remaps
+[keys.normal]
+A-F = ":fmt"
+esc = ["collapse_selection", "keep_primary_selection", ":w"]
+C-r = [":w", ":reload"]
+C-R = [":wa", ":reload-all"]
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"
+
+[keys.normal.space]
+space = "goto_next_buffer"
+m = "goto_previous_buffer"
+q = ":buffer-close"
+
+[keys.select]
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"
+
+[keys.insert]
+A-F = ":fmt"
+esc = ["normal_mode", ":w"]
