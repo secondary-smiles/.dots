@@ -12,5 +12,8 @@ deps["yay"]=""
 deps["zsh"]="yay"
 deps["helix"]="yay"
 deps["starship"]="yay zsh"
+deps["i3-wm"]="yay kitty rofi wallpaper picom fonts"
 
-install starship
+deps["all"]=$(basename $(ls -d */))
+
+install all

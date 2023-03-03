@@ -102,5 +102,24 @@ install() {
 
   INSTALLED+=($package);
 
+  log "setup $package successfully!";
+
   return 0;
+}
+
+
+TEMPLATE=""
+
+template() {
+TEMPLATE="#!/usr/bin/env bash \n
+
+cd ~/.dots/$1 \n
+
+# Utils \n
+source ~/.dots/util.sh \n
+logfile install-$1.log \n
+
+# Install deps \n
+# deps
+"
 }
