@@ -1,13 +1,13 @@
 #!/bin/bash
 
+cd zsh
+
 # Utils
-source ./logger.sh
+source ./util.sh
 logfile install-zsh.log
 
 # Install deps
-log "installing deps.."
-yay -S zsh curl starship
-check
+deps zsh curl starship
 
 # install oh-my-zsh
 log "setting up oh-my-zsh.."
@@ -35,3 +35,5 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 check
 
 log "setup zsh dotfiles successfully!"
+
+cd ../

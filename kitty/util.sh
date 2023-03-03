@@ -1,3 +1,7 @@
+#####################
+# Logging Functions #
+#####################
+
 # Reset styles
 RESET='\x1b[0m'
 
@@ -41,4 +45,15 @@ check() {
   else
     return 0;
   fi
+}
+
+###################
+# Other Functions #
+###################
+
+deps() {
+  log "installing deps..";
+  yay -S $@;
+  check;
+  return 0;
 }
