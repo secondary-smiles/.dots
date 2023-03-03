@@ -60,9 +60,10 @@ check() {
 declare -A deps
 INSTALLED=()
 
+# Install packages from yay or pacman
 deps() {
   log "installing deps: $(echo $@)";
-  yay -S $@;
+  yay -S $@ || sudo pacman -S $@;
   check;
   return 0;
 }
@@ -79,7 +80,7 @@ link() {
   return 0;
 }
 
-# Run install script
+# Run install script + dependencies
 install() {
   package=$1;
 
