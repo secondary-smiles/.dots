@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 
+# Utils
+source ./util.sh
+
 # create install script
-find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'source ~/.dots/util.sh;  cd "{}" && ls install-$(basename "$PWD").sh || template "$PWD" && echo "$TEMPLATE" > install-$(basename "$PWD").sh' \;
+for folder in */; do
+  file=$folder/install-$(basename $folder).sh
+  if test -e $file; then
+    chmod +x $file;
+  else
+    template $folder;
+    echo "$TEMPLATE" > $file;
+    chmod +x $file;
+  fi
+done
 
 # add execute perms
-find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && chmod +x install-$(basename "$PWD").sh' \;
+# find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && chmod +x install-$(basename "$PWD").sh' \;

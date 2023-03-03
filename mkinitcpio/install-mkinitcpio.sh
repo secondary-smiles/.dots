@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/mkinitcpio \n
+cd ~/.dots/mkinitcpio
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/mkinitcpio.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-mkinitcpio.log
 
-# Install deps \n
+# Install deps
 # deps
 

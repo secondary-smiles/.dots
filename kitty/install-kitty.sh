@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/kitty \n
+cd ~/.dots/kitty
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/kitty.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-kitty.log
 
-# Install deps \n
+# Install deps
 # deps
 

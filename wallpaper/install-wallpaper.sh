@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/wallpaper \n
+cd ~/.dots/wallpaper
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/wallpaper.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-wallpaper.log
 
-# Install deps \n
+# Install deps
 # deps
 

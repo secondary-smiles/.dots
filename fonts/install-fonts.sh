@@ -1,11 +1,11 @@
-#!/usr/bin/env bash \n
+#!/usr/bin/env bash 
 
-cd ~/.dots//Users/zerocool/.dots/fonts \n
+cd ~/.dots/fonts
 
-# Utils \n
-source ~/.dots/util.sh \n
-logfile install-/Users/zerocool/.dots/fonts.log \n
+# Utils
+source ~/.dots/util.sh
+logfile install-fonts.log
 
-# Install deps \n
+# Install deps
 # deps
 
