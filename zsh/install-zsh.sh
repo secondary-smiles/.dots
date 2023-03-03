@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 cd ~/.dots/zsh
 
@@ -10,12 +10,12 @@ logfile install-zsh.log
 deps zsh curl starship
 
 # install oh-my-zsh
-log "setting up oh-my-zsh.."
+log "setting up oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 check
 
 # change default shell
-log "setting $(which zsh) as the default shell.."
+log "setting $(which zsh) as the default shell"
 sudo chsh -s /usr/bin/zsh $(whoami)
 check
 
@@ -25,11 +25,11 @@ link ~/.dots/zsh/.zshrc ~/.zshrc
 check
 
 # install zsh plugins
-log "installing zsh-syntax-highlighting.."
+log "installing zsh-syntax-highlighting"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 check
 
-log "installing zsh-autosuggestions.."
+log "installing zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 check
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # create install script
 find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && touch install-$(basename "$PWD").sh' \;
