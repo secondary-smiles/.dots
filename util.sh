@@ -59,9 +59,15 @@ check() {
 
 # Install packages from yay or pacman
 deps() {
-  log "installing deps: $(echo $@)";
-  yay -S $@ || sudo pacman -S $@;
-  check;
+  log "installing deps: $*";
+
+  for dep in "$@"; do
+    if ! pacman -Qs ^"$dep"$ &> /dev/null; then
+      yay -S "$dep" || sudo pacman -S "$dep";
+      check;
+    fi 
+  done;
+  
   return 0;
 }
 
