@@ -25,4 +25,7 @@ cd ../
 rm -rf yay-git
 check
 
-link ~/.dots/yay/config.json ~/.config/yay/config.json
+# Set yay options
+log "setting options"
+yay -Y --noeditmenu --nodiffmenu --save
+check

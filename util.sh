@@ -57,9 +57,6 @@ check() {
 # Other Functions #
 ###################
 
-declare -A deps
-INSTALLED=()
-
 # Install packages from yay or pacman
 deps() {
   log "installing deps: $(echo $@)";
@@ -80,18 +77,21 @@ link() {
   return 0;
 }
 
+declare -A needs
+INSTALLED=()
+
 # Run install script + dependencies
 # Package to install for this instance is '$1'
 install() {
-  log "checking dependencies for $1: '${deps[$1]}'"
+  log "checking dependencies for $1: '${needs[$1]}'"
 
-  for dep in ${deps[$1]}; do
-    if [[ " ${INSTALLED[*]} " =~ " ${dep} "  ]]; then
-      log "dependency $dep already installed";
+  for need in ${needs[$1]}; do
+    if [[ " ${INSTALLED[*]} " =~ " ${need} "  ]]; then
+      log "dependency $need already installed";
       continue;
     else
-      warn "dependency $dep not installed. installing.";  
-      install $dep;
+      warn "dependency $need not installed. installing.";  
+      install $need;
       check;
     fi
   done
