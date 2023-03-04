@@ -7,7 +7,8 @@ source ~/.dots/util.sh
 logfile install.log
 
 # All 'packages' and dependencies [package]="dependencies"
-deps["yay"]=""
+deps["pacman"]=""
+deps["yay"]="pacman"
 deps["zsh"]="yay"
 deps["helix"]="yay"
 deps["starship"]="yay zsh"
@@ -18,7 +19,6 @@ deps["all"]=$(basename "$(ls -d */)")
 # Install args or all
 packages=${*:-all}
 
-log "installing $packages"
 for pkg in $packages; do
   install "$pkg";
 done
