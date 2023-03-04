@@ -3,5 +3,5 @@
 source ~/.dots/util.sh
 
 # Register deps
-needs["zsh"]="yay"
+needs["zsh"]="yay git"
     
