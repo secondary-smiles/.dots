@@ -7,7 +7,8 @@ source ~/.dots/util.sh
 logfile install.log
 
 # All 'packages' and dependencies [package]="dependencies"
-needs["all"]=$(basename "$(ls -d */)")
+# Lists all nonhidden folders
+needs["all"]=$(find . -mindepth 1 -maxdepth 1 -type d -not -path '*/.*' -exec basename {} \;)
 
 # Install args or all
 packages=${*:-all}
