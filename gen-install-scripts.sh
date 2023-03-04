@@ -3,6 +3,8 @@
 # Utils
 source ~/.dots/util.sh
 
+cd ~/.dots/pkg
+
 log "creating install scripts"
 # create install script
 for folder in */; do
@@ -14,7 +16,7 @@ for folder in */; do
     path=$(basename "$folder")
     TEMPLATE="#!/usr/bin/env bash 
 
-cd ~/.dots/$path
+cd ~/.dots/pkg/$path
 
 # Utils
 source ~/.dots/util.sh

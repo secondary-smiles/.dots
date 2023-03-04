@@ -1,11 +1,13 @@
 source ~/.dots/util.sh
+logfile "cleanup.log"
 
 warn "this will reset all logs and reset the installed list"
 
 prompt
 
-log "deleting installed list"
-rm -f ~/.dots/installed
+log "resetting installed list ~/.dots/pkg/installed"
+rm -f ~/.dots/pkg/installed
+: > ~/.dots/pkg/installed
 
 for log in $(find ~/.dots -name "*.log" -type f); do
   log "deleting $log"
