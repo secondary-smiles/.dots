@@ -11,13 +11,18 @@ deps git
 
 # Clone 'yay' git repo
 log "cloning yay from https://aur.archlinux.org/yay.git"
-git clone https://aur.archlinux.org/yay.git
+git clone https://aur.archlinux.org/yay.git yay-git
 check
 
 # Install 'yay'
-cd yay
+log "building yay"
+cd yay-git
 makepkg -si
 check
+
+# Cleanup git repo
 cd ../
+rm -rf yay-git
+check
 
 link ~/.dots/yay/config.json ~/.config/yay/config.json

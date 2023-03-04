@@ -81,14 +81,14 @@ link() {
 }
 
 # Run install script + dependencies
+# Package to install for this instance is '$1'
 install() {
-  package=$1;
+  log "checking dependencies for $1: '${deps[$1]}'"
 
-  log "checking dependencies '${deps[$package]}'"
-
-  for dep in ${deps[$package]}; do
+  for dep in ${deps[$1]}; do
     if [[ " ${INSTALLED[*]} " =~ " ${dep} "  ]]; then
       log "dependency $dep already installed";
+      continue;
     else
       warn "dependency $dep not installed. installing.";  
       install $dep;
@@ -96,13 +96,13 @@ install() {
     fi
   done
 
-  log "installing $package";
-  /usr/bin/env bash ~/.dots/$package/install-$package.sh;
+  log "installing $1";
+  /usr/bin/env bash ~/.dots/$1/install-$1.sh;
   check
 
-  INSTALLED+=($package);
+  INSTALLED+=($1);
 
-  log "setup $package successfully!";
+  log "setup $1 successfully!";
 
   return 0;
 }
