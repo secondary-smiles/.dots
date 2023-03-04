@@ -9,21 +9,25 @@ logfile install-yay.log
 # Install deps
 deps git
 
-# Clone 'yay' git repo
-log "cloning yay from https://aur.archlinux.org/yay.git"
-git clone https://aur.archlinux.org/yay.git yay-git
-check
+# Only install if not in path already
+if ! command -v yay &> /dev/null
+then
+  # Clone 'yay' git repo
+  log "cloning yay from https://aur.archlinux.org/yay.git"
+  git clone https://aur.archlinux.org/yay.git yay-git
+  check
 
-# Install 'yay'
-log "building yay"
-cd yay-git
-makepkg -si
-check
+  # Install 'yay'
+  log "building yay"
+  cd yay-git
+  makepkg -si
+  check
 
-# Cleanup git repo
-cd ../
-rm -rf yay-git
-check
+  # Cleanup git repo
+  cd ../
+  rm -rf yay-git
+  check
+fi
 
 # Set yay options
 log "setting options"
