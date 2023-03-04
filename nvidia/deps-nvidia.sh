@@ -3,5 +3,5 @@
 source ~/.dots/util.sh
 
 # Register deps
-needs["wallpaper"]="yay"
+needs["nvidia"]=""
     
