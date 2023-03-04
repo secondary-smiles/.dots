@@ -10,7 +10,7 @@
 RESET='\x1b[0m'
 
 # Logfile
-LOGFILE='logger.log'
+LOGFILE='install.log'
 
 # Last logged command
 LAST=''
@@ -85,36 +85,36 @@ link() {
 
 declare -A needs
 
-if test -e "$INSTALLED"]; then
-  declare -a INSTALLED;
-  export INSTALLED
-fi
-
 # Run install script + dependencies
 # Package to install for this instance is '$1'
 install() {
-  if test -e ~/.dots/$1/deps-$1.sh; then
+  # Check if already installed
+  if grep -xq "$1" ~/.dots/installed; then
+    error "$1 is already installed"
+  fi
+
+  if test -e ~/.dots/"$1"/deps-"$1".sh; then
     source ~/.dots/$1/deps-$1.sh;
   fi
   
   log "checking dependencies for $1: '${needs[$1]}'"
 
   for need in ${needs[$1]}; do
-    if [[ " ${INSTALLED[*]} " =~ " ${need} "  ]]; then
+    if grep -xq "$need" ~/.dots/installed; then
       log "dependency $need already installed";
       continue;
     else
       warn "dependency $need not installed. installing.";  
-      install $need;
+      install "$need";
       check;
     fi
   done
 
   log "installing $1";
-  /usr/bin/env bash ~/.dots/$1/install-$1.sh;
+  /usr/bin/env bash ~/.dots/"$1"/install-"$1".sh;
   check
 
-  INSTALLED+=("$1");
+  echo "$1" >> ~/.dots/installed
 
   log "setup $1 successfully!";
 
