@@ -91,29 +91,46 @@ link() {
 declare -A needs
 
 # Run install script + dependencies
-# Package to install for this instance is '$1'
+# Package to install for this instance is '$1', nocheck will disable dep checks, '$2' is the caller for recursive functions
 install() {
+  local nocheck=0
+  if [[ "$1" == "nocheck" ]]; then
+    shift
+    nocheck=1
+  fi
+
   # Check if already installed
   if grep -xq "$1" ~/.dots/installed; then
-    error "$1 is already installed"
+    log "$1 is already installed"
+    exit 0;
   fi
 
   if test -e ~/.dots/"$1"/deps-"$1".sh; then
-    source ~/.dots/$1/deps-$1.sh;
+    source ~/.dots/"$1"/deps-"$1".sh;
   fi
   
-  log "checking dependencies for $1: '${needs[$1]}'"
-
-  for need in ${needs[$1]}; do
-    if grep -xq "$need" ~/.dots/installed; then
-      log "dependency $need already installed";
-      continue;
-    else
-      warn "dependency $need not installed. installing.";  
-      install "$need";
-      check;
-    fi
-  done
+  if [[ "$nocheck" == "0" ]]; 
+  then
+    log "checking dependencies for $1: '${needs[$1]}'"
+    for need in ${needs[$1]}; do
+      if grep -xq "$need" ~/.dots/installed; then
+        log "dependency $need already installed";
+        continue;
+      else
+        warn "dependency $need not installed. installing.";  
+        if [[ "$2" == "$need" ]]; then
+          warn "cyclic dependency detected between $1 and $need"
+          install nocheck "$need" "${2:-$1}";
+        fi
+        install "$need" "${2:-$1}";
+        check;
+      fi
+    done
+  else
+    warn "installing $1 without checking dependencies (likely because of dependency loop)"
+    warn "this can break stuff"
+    prompt
+  fi
 
   log "installing $1";
   /usr/bin/env bash ~/.dots/"$1"/install-"$1".sh;
@@ -126,20 +143,12 @@ install() {
   return 0;
 }
 
+prompt() {
+  read -rp "Do you want to proceed? [Y/n] " yn
 
-TEMPLATE=""
-
-template() {
-path=$(basename $1)
-TEMPLATE="#!/usr/bin/env bash 
-
-cd ~/.dots/$path
-
-# Utils
-source ~/.dots/util.sh
-logfile install-$path.log
-
-# Install deps
-# deps
-"
+  case $yn in 
+  	Y|y|"" ) return 0;;
+  	N|n ) error "cancelled";;
+  	* ) error invalid response;;
+  esac
 }
