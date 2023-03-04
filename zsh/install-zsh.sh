@@ -9,7 +9,7 @@ logfile install-zsh.log
 # Install deps
 deps zsh curl starship
 
-if [ -z "$ZSH" ]; then
+if [ ! -d "$ZSH" ]; then
   # install oh-my-zsh
   log "setting up oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -26,7 +26,7 @@ check
 
 # install zsh plugins
 log "installing zsh-syntax-highlighting"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting || true
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting || true
 
 log "installing zsh-autosuggestions"
-git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions || true
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions || true

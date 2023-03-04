@@ -3,6 +3,7 @@
 # Utils
 source ~/.dots/util.sh
 
+log "creating install scripts"
 # create install script
 for folder in */; do
   file="$folder"install-$(basename "$folder").sh
@@ -10,13 +11,25 @@ for folder in */; do
     warn "skipping $file"
     chmod +x "$file";
   else
-    template "$folder";
+    path=$(basename "$folder")
+    TEMPLATE="#!/usr/bin/env bash 
+
+cd ~/.dots/$path
+
+# Utils
+source ~/.dots/util.sh
+logfile install-$path.log
+
+# Install deps
+# deps
+"
     echo "$TEMPLATE" > "$file";
     log "set up $file"
     chmod +x "$file";
   fi
 done
 
+log "creating dependency files"
 # Create dep file
 for folder in */; do
   file="$folder"deps-$(basename "$folder").sh

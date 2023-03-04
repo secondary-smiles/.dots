@@ -7,5 +7,6 @@ source ~/.dots/util.sh
 logfile install-picom.log
 
 # Install deps
-# deps
+deps picom
 
+link ~/.dots/picom/picom.conf ~/.config/picom.conf
