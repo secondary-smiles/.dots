@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Utils
-source ./util.sh
+source ~/.dots/util.sh
 
 # create install script
 for folder in */; do
@@ -16,6 +16,3 @@ for folder in */; do
     chmod +x $file;
   fi
 done
-
-# add execute perms
-# find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && chmod +x install-$(basename "$PWD").sh' \;
