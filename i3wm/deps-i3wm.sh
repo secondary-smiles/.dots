@@ -3,5 +3,5 @@
 source ~/.dots/util.sh
 
 # Register deps
-needs["i3wm"]="yay kitty rofi wallpaper fonts picom"
+needs["i3wm"]="yay xorg kitty rofi wallpaper fonts picom"
     

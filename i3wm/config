@@ -241,4 +241,4 @@ bar {
 exec_always --no-startup-id picom
 
 ## Set a random wallpaper
-exec_always --no-startup-id "nitrogen --set-zoom-fill --random ~/.dotfiles/wallpaper/ --save"
+exec_always --no-startup-id "nitrogen --set-zoom-fill --random ~/.dots/wallpaper/files/ --save"
