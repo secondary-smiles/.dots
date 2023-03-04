@@ -2,13 +2,7 @@ source ~/.dots/util.sh
 
 warn "this will reset all logs and reset the installed list"
 
-read -p "Do you want to proceed? [Y/n] " yn
-
-case $yn in 
-	Y|y|"" ) ;;
-	N|n ) error "cancelled";;
-	* ) error invalid response;;
-esac
+prompt
 
 log "deleting installed list"
 rm -f ~/.dots/installed
