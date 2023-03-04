@@ -7,5 +7,6 @@ source ~/.dots/util.sh
 logfile install-rofi.log
 
 # Install deps
-# deps
+deps rofi
 
+link ~/.dots/rofi/config.rasi ~/.config/rofi/config.rasi
