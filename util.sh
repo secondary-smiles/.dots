@@ -100,20 +100,20 @@ install() {
   fi
 
   # Check if already installed
-  if grep -xq "$1" ~/.dots/installed; then
+  if grep -xq "$1" ~/.dots/pkg/installed; then
     log "$1 is already installed"
     exit 0;
   fi
 
-  if test -e ~/.dots/"$1"/deps-"$1".sh; then
-    source ~/.dots/"$1"/deps-"$1".sh;
+  if test -e ~/.dots/pkg/"$1"/deps-"$1".sh; then
+    source ~/.dots/pkg/"$1"/deps-"$1".sh;
   fi
   
   if [[ "$nocheck" == "0" ]]; 
   then
     log "checking dependencies for $1: '${needs[$1]}'"
     for need in ${needs[$1]}; do
-      if grep -xq "$need" ~/.dots/installed; then
+      if grep -xq "$need" ~/.dots/pkg/installed; then
         log "dependency $need already installed";
         continue;
       else
@@ -133,10 +133,10 @@ install() {
   fi
 
   log "installing $1";
-  /usr/bin/env bash ~/.dots/"$1"/install-"$1".sh;
+  /usr/bin/env bash ~/.dots/pkg/"$1"/install-"$1".sh;
   check
 
-  echo "$1" >> ~/.dots/installed
+  echo "$1" >> ~/.dots/pkg/installed
 
   log "setup $1 successfully!";
 

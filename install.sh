@@ -8,7 +8,7 @@ logfile install.log
 
 # All 'packages' and dependencies [package]="dependencies"
 # Lists all nonhidden folders
-needs["all"]=$(find . -mindepth 1 -maxdepth 1 -type d -not -path '*/.*' -exec basename {} \;)
+needs["all"]=$(find pkg -mindepth 1 -maxdepth 1 -type d -not -path '*/.*'  | xargs -n1 basename)
 
 # Install args or all
 packages=${*:-all}
