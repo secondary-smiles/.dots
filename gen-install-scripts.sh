@@ -5,14 +5,34 @@ source ~/.dots/util.sh
 
 # create install script
 for folder in */; do
-  file="$folder"install-$(basename $folder).sh
-  if test -e $file; then
+  file="$folder"install-$(basename "$folder").sh
+  if test -e "$file"; then
     warn "skipping $file"
-    chmod +x $file;
+    chmod +x "$file";
   else
-    template $folder;
-    echo "$TEMPLATE" > $file;
+    template "$folder";
+    echo "$TEMPLATE" > "$file";
     log "set up $file"
-    chmod +x $file;
+    chmod +x "$file";
+  fi
+done
+
+# Create dep file
+for folder in */; do
+  file="$folder"deps-$(basename "$folder").sh
+  if test -e "$file"; then
+    warn "skipping $file"
+    chmod +x "$file";
+  else
+    TEMPLATE="#!/usr/bin/env bash
+# Utils
+source ~/.dots/util.sh
+
+# Register deps
+needs[\"$(basename "$folder")\"]=\"\"
+    "
+    echo "$TEMPLATE" > "$file";
+    log "set up $file"
+    chmod +x "$file";
   fi
 done

@@ -76,19 +76,27 @@ link() {
   log "linking $1 to $2";
 
   destdir="${2%/*}/";
-  mkdir -p $destdir;
+  mkdir -p "$destdir";
   
-  ln -sf $1 $2;
+  ln -sf "$1" "$2";
   check
   return 0;
 }
 
 declare -A needs
-INSTALLED=()
+
+if test -e "$INSTALLED"]; then
+  declare -a INSTALLED;
+  export INSTALLED
+fi
 
 # Run install script + dependencies
 # Package to install for this instance is '$1'
 install() {
+  if test -e ~/.dots/$1/deps-$1.sh; then
+    source ~/.dots/$1/deps-$1.sh;
+  fi
+  
   log "checking dependencies for $1: '${needs[$1]}'"
 
   for need in ${needs[$1]}; do
@@ -106,7 +114,7 @@ install() {
   /usr/bin/env bash ~/.dots/$1/install-$1.sh;
   check
 
-  INSTALLED+=($1);
+  INSTALLED+=("$1");
 
   log "setup $1 successfully!";
 

@@ -16,8 +16,8 @@ if [ -z "$ZSH" ]; then
   check
 fi
 # change default shell
-log "setting $(which zsh) as the default shell"
-sudo chsh -s /usr/bin/zsh $(whoami)
+log "setting /usr/bin/zsh as the default shell"
+sudo chsh -s /usr/bin/zsh "$(whoami)"
 check
 
 # link .zshrc file
@@ -26,7 +26,7 @@ check
 
 # install zsh plugins
 log "installing zsh-syntax-highlighting"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting || true
 
 log "installing zsh-autosuggestions"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
+git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions || true
