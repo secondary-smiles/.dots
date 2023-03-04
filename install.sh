@@ -15,4 +15,10 @@ deps["i3-wm"]="yay kitty rofi wallpaper picom fonts"
 
 deps["all"]=$(basename "$(ls -d */)")
 
-install all
+# Install args or all
+packages=${*:-all}
+
+log "installing $packages"
+for pkg in $packages; do
+  install "$pkg";
+done
