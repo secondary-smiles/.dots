@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 source ~/.dots/util.sh
 logfile "cleanup.log"
 
