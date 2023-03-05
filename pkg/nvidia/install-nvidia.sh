@@ -12,16 +12,17 @@ deps nvidia egl-wayland lib32-nvidia-utils libvdpau libxnvctrl nvidia-settings n
 # Patch mkinitcpio
 log "patching mkinitcpio"
 log "linking ~/.dots/pkg/nvidia/mkinitcpio.conf to /etc/mkinitcpio.conf"
-sudo ln -sf ~/.dots/pkg/nvidia/mkinitcpio.conf /etc/mkinitpcio.conf
+sudo ln -sf ~/.dots/pkg/nvidia/mkinitcpio.conf /etc/mkinitcpio.conf
 check
 
 log "rebuilding mkinitpcio"
-sudo mkinitpcio -P
+sudo mkinitcpio -P
 check
 
 log "patching grub"
 log "linking ~/.dots/pkg/nvidia/grub to /etc/default/grub"
-sudo ln -sf ~/.dots/pkg/nvidia /etc/default/grub
+sudo ln -sf ~/.dots/pkg/nvidia/grub /etc/default/grub
+
 check
 
 log "updating grub"
@@ -30,5 +31,5 @@ check
 
 # Configure xorg for gpu
 log "setting xorg to use gpu"
-sudo nvida-xconfig
+sudo nvidia-xconfig
 check
