@@ -138,7 +138,7 @@ install() {
 
   echo "$1" >> ~/.dots/pkg/installed
 
-  log "setup $1 successfully!";
+  log "installed $1 successfully!";
 
   return 0;
 }
