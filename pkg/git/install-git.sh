@@ -20,4 +20,6 @@ check
 # Set git settings
 log "setting git settings"
 git config --global init.defaultBranch main
+check
 git config --global core.editor helix
+check

@@ -3,5 +3,5 @@
 source ~/.dots/util.sh
 
 # Register deps
-needs["nvidia"]=""
+needs["nvidia"]="yay xorg"
     
