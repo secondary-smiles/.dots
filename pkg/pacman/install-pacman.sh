@@ -16,6 +16,6 @@ then
 fi
 
 # Link pacman.conf
-log "linking ~/.dots/pacman/pacman.conf to /etc/pacman.conf"
+log "linking ~/.dots/pkg/pacman/pacman.conf to /etc/pacman.conf"
 sudo  ln -sf ~/.dots/pkg/pacman/pacman.conf /etc/pacman.conf
 check

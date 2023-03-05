@@ -45,7 +45,7 @@ source ~/.dots/util.sh
 
 # Register deps
 needs[\"$(basename "$folder")\"]=\"\"
-    "
+"
     echo "$TEMPLATE" > "$file";
     log "set up $file"
     chmod +x "$file";
