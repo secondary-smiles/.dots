@@ -3,5 +3,5 @@
 source ~/.dots/util.sh
 
 # Register deps
-needs["fonts"]="git"
+needs["fonts"]="yay git"
     
