@@ -9,4 +9,4 @@ logfile install-picom.log
 # Install deps
 deps picom
 
-link ~/.dots/pkg/picom/picom.conf ~/.config/picom.conf
+link ~/.dots/pkg/picom/picom.conf ~/.config/picom/picom.conf
