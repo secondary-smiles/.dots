@@ -4,7 +4,6 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
-
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
@@ -128,6 +127,10 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# switch/iterate between workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -156,8 +159,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+	# exit i3 (logs you out of your X session)
+	# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# exit-menu
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -223,7 +228,7 @@ bar {
         -p playerctl.format="{{title}} - {{artist}}" \
 		-p playerctl.hide=true \
         \
-        -t iceberg
+        -t nord-colorful
 
     colors {
         background #161821
@@ -236,9 +241,18 @@ bar {
     }
 }
 
+# App binds
+## Screenshot
+bindsym Print exec scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+
 # Startup
 ## Start Picom
 exec_always --no-startup-id picom
 
 ## Set a random wallpaper
 exec_always --no-startup-id "nitrogen --set-zoom-fill --random ~/.dots/pkg/wallpaper/files/ --save"
+
+## Desktop notifications
+exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+
+
