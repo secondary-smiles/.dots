@@ -217,11 +217,13 @@ bar {
 	status_command bumblebee-status \
         -m cpu \
         -m memory \
+		-m network_traffic \
         -m aur-update \
         -m playerctl \
 		-m pasink \
         -m aur-update \
         -m datetime \
+		-m dunst \
         \
         -p datetime.format="%l:%M%P %Y/%m/%d" \
         -p memory.usedonly=True \

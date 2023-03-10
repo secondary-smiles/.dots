@@ -22,6 +22,6 @@ check
 
 # Link nvidia.hook
 
-log "linking ~/.dots/pkg/pacman/nvidia.hook to /etc/pacman.d/hooks/nvidia.hook"
-sudo ln -sf ~/.dots/pkg/pacman/nvidia.hook /etc/pacman.d/hooks/nvidia.hook
-check
+#log "linking ~/.dots/pkg/pacman/nvidia.hook to /etc/pacman.d/hooks/nvidia.hook"
+#sudo ln -sf ~/.dots/pkg/pacman/nvidia.hook /etc/pacman.d/hooks/nvidia.hook
+#check
