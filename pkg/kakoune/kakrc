@@ -2,75 +2,109 @@
 set-option global ui_options terminal_assistant=none
 # width of a tab
 set-option global tabstop 2
+set-option global indentwidth 2
 
-# always keep one line and three columns displayed around the cursor
+# always keep eight lines and three columns displayed around the cursor
 set-option global scrolloff 8,3
 
+## highlighting
 # display line numbers
 add-highlighter global/ number-lines -hlcursor -relative -separator "  " -cursor-separator " |"
 # show matching symbols
 add-highlighter global/ show-matching
 
-# custom commands
-define-command save-buffer -docstring "save current buffer and show info"  %{execute-keys ":w<ret>:info 'file saved at %sh{date}'<ret>"}
+## custom commands
+# save buffer
+define-command save-buffer -docstring "save current buffer and show info"  %{
+  write
+  info "file saved at %sh{date}"
+}
+# open tutor (needs curl)
+define-command  trampoline -docstring "open a tutorial" %{
+  evaluate-commands %sh{
+    tramp_file=$(mktemp -t "kakoune-trampoline.XXXXXXXX")
+    echo "edit -fifo $tramp_file *TRAMPOLINE*"
+    curl -s https://raw.githubusercontent.com/mawww/kakoune/master/contrib/TRAMPOLINE -o "$tramp_file"
+  }
+}
 
 ## plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 # luar
 plug "gustavo-hms/luar" %{
-    require-module luar
+  require-module luar
 }
 # buffer management
 plug "delapouite/kakoune-buffers"
-# fzf
-plug "andreyorst/fzf.kak" 
-# mirror
-plug "delapouite/kakoune-mirror" %{
-    map global normal m ":enter-user-mode -lock mirror<ret>"
-
-    unmap global mirror b "B<a-;>W<a-;>"
-		map -docstring "word begin" global mirror q "Q<a-;>W<a-;>"
+# byline
+plug "evanrelf/byline.kak" config %{
+  require-module "byline"
 }
+# fzf
+plug "andreyorst/fzf.kak" config %{
+  require-module fzf
+  require-module fzf-grep
+  require-module fzf-file
+} defer fzf %{
+  set-option global fzf_highlight_command "lat -r {}"
+} defer fzf-file %{
+  set-option global fzf_file_command "fd . --no-ignore-vcs"
+} defer fzf-grep %{
+  set-option global fzf_grep_command "fd"
+} 
 # autopairs
 plug "alexherbo2/auto-pairs.kak" config %{
-	enable-auto-pairs
+  enable-auto-pairs
 }
-#themes
+# themes
 plug "secondary-smiles/kakoune-themes" theme config %{
-    colorscheme berry
+  colorscheme pastel
 }
 #lsp
 plug "kak-lsp/kak-lsp" do %{
-    cargo install --locked --force --path .
-    # optional: if you want to use specific language servers
-    # mkdir -p ~/.config/kak-lsp
-    # cp -n kak-lsp.toml ~/.config/kak-lsp/
+  cargo install --locked --force --path .
+  # optional: if you want to use specific language servers
+  # mkdir -p ~/.config/kak-lsp
+  # cp -n kak-lsp.toml ~/.config/kak-lsp/
 }
 # powerline
 plug "andreyorst/powerline.kak" defer kakoune-themes %{
-   powerline-theme warm
+  powerline-theme pastel
 } defer powerline %{
-        powerline-format global "git bufname filetype mode_info lsp line_column position"
-        powerline-separator custom ""
+  powerline-format global "git lsp bufname filetype mode_info lsp line_column position"
+  set-option global powerline_separator_thin ""
+  set-option global powerline_separator ""
 } config %{
-    powerline-start
+  powerline-start
 }
+# inc-dec numbers
+plug "https://gitlab.com/Screwtapello/kakoune-inc-dec" 
 
 ## key bindings
 # user
 # buffer manipulation
-map -docstring "close current buffer" global user b ":db<ret>"
-map -docstring "goto previous buffer" global user n ":bp<ret>"
-map -docstring "goto next buffer" global user m ":bn<ret>"
-map -docstring "show buffer info" global user , ":info-buffers<ret>"
-map -docstring "buffer tools" global user . ":enter-user-mode buffers<ret>"
+map -docstring "close current buffer" global user b ": db<ret>"
+map -docstring "goto previous buffer" global user n ": bp<ret>"
+map -docstring "goto next buffer" global user m ": bn<ret>"
+map -docstring "show buffer info" global user , ": info-buffers<ret>"
+map -docstring "buffer tools" global user . ": enter-user-mode buffers<ret>"
 # save
-map -docstring "save current buffer" global user s ":save-buffer<ret>"
+map -docstring "save current buffer" global user s ": save-buffer<ret>"
 # fzf
-map -docstring "open fzf" global user f ":fzf-mode<ret>"
+map -docstring "open fzf" global user f ": fzf-mode<ret>"
 # lsp
-map -docstring "open lsp" global user l ":enter-user-mode lsp<ret>"
+map -docstring "open lsp" global user l ": enter-user-mode lsp<ret>"
+# fancy insert newline
+map -docstring "insert newline above" global user [ "O<esc>j"
+map -docstring "insert newline below" global user ] "o<esc>k"
+# spellcheck
+map -docstring "check document for spelling" global user w ": spell<ret>"
+map -docstring "clear document spelling" global user q ": spell-clear<ret>"
+# copy to system pboard
+map -docstring "copy to system pboard" global user y "<a-|> pbcopy<ret>"
+# git-gutter
+plug "tom-huntington/simple-git-gutter.kak"
 
 # normal
 # remap b to q
@@ -78,9 +112,13 @@ map global normal q b
 map global normal Q B
 map global normal <a-q> <a-b>
 map global normal <a-Q> <a-B>
-
 # unselect on <esc>
 map global normal <esc> ";,"
+# inc-dec numbers bind
+map -docstring "increment number" global normal <c-a> ": inc-dec-modify-numbers + 1<ret>"
+map -docstring "decrement number" global normal <c-x> ": inc-dec-modify-numbers - 1<ret>"
+# comment lines
+map -docstring "comment/uncomment line" global normal <c-v> ": comment-line<ret>"
 
 # hooks
 # autosave
@@ -88,62 +126,71 @@ hook global ModeChange pop:insert:.* %{save-buffer}
 
 # tabs for autocomplete
 hook global InsertCompletionShow .* %{
-    try %{
-        # this command temporarily removes cursors preceded by whitespace;
-        # if there are no cursors left, it raises an error, does not
-        # continue to execute the mapping commands, and the error is eaten
-        # by the `try` command so no warning appears.
-        execute-keys -draft 'h<a-K>\h<ret>'
-        map window insert <tab> <c-n>
-        map window insert <s-tab> <c-p>
-        hook -once -always window InsertCompletionHide .* %{
-            unmap window insert <tab> <c-n>
-            unmap window insert <s-tab> <c-p>
-        }
+  try %{
+    # this command temporarily removes cursors preceded by whitespace;
+    # if there are no cursors left, it raises an error, does not
+    # continue to execute the mapping commands, and the error is eaten
+    # by the `try` command so no warning appears.
+    execute-keys -draft 'h<a-K>\h<ret>'
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+    hook -once -always window InsertCompletionHide .* %{
+      unmap window insert <tab> <c-n>
+      unmap window insert <s-tab> <c-p>
     }
+  }
+}
+
+# highlighting
+hook global WinSetOption filetype=markdown %{
+  add-highlighter -override global/markdown-wrap wrap -word
+
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-highlighter global/markdown-wrap
+  }
 }
 
 # lsp
 hook global WinSetOption filetype=(rust|javascript|typescript|c) %{
-    lsp-enable-window
-    lsp-inlay-diagnostics-enable global
+  lsp-enable-window
+  lsp-inlay-diagnostics-enable global
 }
-# enable syntax highlighting for each lang
+## enable syntax highlighting for each lang
 # c
 hook global WinSetOption filetype=c %{
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
+  hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+  hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+  hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-hooks window semantic-tokens
+  }
 }
 
 # rust
 hook global WinSetOption filetype=rust %{
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
+  hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+  hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+  hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-hooks window semantic-tokens
+  }
 }
 # typescript
 hook global WinSetOption filetype=typescript %{
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
+  hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+  hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+  hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-hooks window semantic-tokens
+  }
 }
 
 # javascript
 hook global WinSetOption filetype=javascript %{
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
+  hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+  hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+  hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-hooks window semantic-tokens
+  }
 }
