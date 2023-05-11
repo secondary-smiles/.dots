@@ -221,7 +221,6 @@ bar {
         -m aur-update \
         -m playerctl \
 		-m pasink \
-        -m aur-update \
         -m datetime \
 		-m dunst \
         \
@@ -249,7 +248,7 @@ bindsym Print exec scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png && notify-send
 
 # Startup
 ## Start Picom
-exec_always --no-startup-id picom
+# exec_always --no-startup-id picom
 
 ## Set a random wallpaper
 exec_always --no-startup-id "nitrogen --set-zoom-fill --random ~/.dots/pkg/wallpaper/files/ --save"
