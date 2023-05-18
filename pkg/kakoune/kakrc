@@ -151,10 +151,14 @@ hook global WinSetOption filetype=markdown %{
 }
 
 # lsp
-hook global WinSetOption filetype=(rust|javascript|typescript|c) %{
-  lsp-enable-window
-  lsp-inlay-diagnostics-enable global
-}
+# hook global WinSetOption filetype=(rust|javascript|typescript|c) %{
+#   lsp-enable-window
+#   lsp-inlay-diagnostics-enable global
+# }
+
+lsp-enable
+lsp-inlay-diagnostics-enable global
+
 ## enable syntax highlighting for each lang
 # c
 hook global WinSetOption filetype=c %{
