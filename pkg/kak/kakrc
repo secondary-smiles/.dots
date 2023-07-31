@@ -79,7 +79,11 @@ plug "andreyorst/powerline.kak" defer kakoune-themes %{
   powerline-start
 }
 # inc-dec numbers
-plug "https://gitlab.com/Screwtapello/kakoune-inc-dec" 
+plug "https://gitlab.com/Screwtapello/kakoune-inc-dec"
+# smarttab
+plug "andreyorst/smarttab.kak"
+hook global BufOpenFile .* expandtab
+hook global BufNewFile  .* expandtab
 
 ## key bindings
 # user
@@ -162,6 +166,16 @@ lsp-inlay-diagnostics-enable global
 ## enable syntax highlighting for each lang
 # c
 hook global WinSetOption filetype=c %{
+  hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+  hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+  hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+  hook -once -always window WinSetOption filetype=.* %{
+    remove-hooks window semantic-tokens
+  }
+}
+
+# d
+hook global WinSetOption filetype=d %{
   hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
   hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
   hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens

@@ -1,21 +1,24 @@
+# zmodload zsh/zprof
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:$HOME/pkg/bin
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$(yarn global bin)
+export PATH=$HOME/pkg/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.nimble/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-export EDITOR="kak"
+export EDITOR="nvim"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="frontcube"
+# ZSH_THEME="frontcube"
 
 # Set starship prompt
-# eval $(starship init zsh)
+eval $(starship init zsh)
 
 # Set primp prompt
 # TODO: Add to binary for an `eval`
@@ -118,10 +121,16 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e="exit"
 alias hx="helix"
+alias nv="nvim"
 alias tree="tree -C --gitignore"
 alias ac="arduino-cli"
+alias python="python3"
+alias pip="pip3"
+alias ldc="ldc2"
 
 # start ssh agent
-eval $(ssh-agent) > /dev/null
+# eval $(ssh-agent) > /dev/null
 # add ssh keys
-ssh-add -q ~/aws/*
+# ssh-add -q ~/aws/*
+
+# zprof
