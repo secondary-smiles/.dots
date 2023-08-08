@@ -27,3 +27,4 @@ vim.keymap.set("n", "gh", "0")
 vim.keymap.set("n", "gl", "$")
 vim.keymap.set("n", "ge", "G")
 
+vim.keymap.set("n", "<leader>lf", "<nop>")

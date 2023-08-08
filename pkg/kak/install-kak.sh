@@ -10,7 +10,7 @@ logfile install-kakoune.log
 deps kakoune
 
 # Link files
-link ~/.dots/pkg/kakoune/kakrc ~/.config/kak/kakrc
+link ~/.dots/pkg/kak/kakrc ~/.config/kak/kakrc
 
 # Setup plug.kak
 log "installing plug.kak"
