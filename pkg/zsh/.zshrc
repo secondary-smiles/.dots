@@ -4,7 +4,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/pkg/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.nimble/bin:$PATH
+export PATH=$HOME/.ghcup/bin:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -18,11 +19,7 @@ export EDITOR="nvim"
 # ZSH_THEME="frontcube"
 
 # Set starship prompt
-eval $(starship init zsh)
-
-# Set primp prompt
-# TODO: Add to binary for an `eval`
-# source ~/code/c/primp/hook.zsh
+# eval $(starship init zsh)
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

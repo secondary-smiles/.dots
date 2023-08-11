@@ -116,3 +116,7 @@ lspconfig.rust_analyzer.setup {}
 lspconfig.pyright.setup {}
 lspconfig.marksman.setup {}
 lspconfig.elmls.setup {}
+lspconfig.zls.setup {}
+lspconfig.hls.setup {
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
