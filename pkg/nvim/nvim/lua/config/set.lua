@@ -23,3 +23,4 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.showmode = false
 
+vim.opt.colorcolumn="80"

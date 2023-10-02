@@ -11,6 +11,8 @@ export PATH=$HOME/.cabal/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
 export EDITOR="nvim"
+export PAGER="less"
+export GPG_TTY="$(tty)"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -20,6 +22,9 @@ export EDITOR="nvim"
 
 # Set starship prompt
 # eval $(starship init zsh)
+
+# prim prompt
+source ~/pkg/prim/hook.zsh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -32,7 +37,7 @@ export EDITOR="nvim"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates

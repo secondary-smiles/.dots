@@ -120,3 +120,9 @@ lspconfig.zls.setup {}
 lspconfig.hls.setup {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
+lspconfig.unison.setup {}
+lspconfig.perlls.setup {}
+lspconfig.ocamllsp.setup {}
+lspconfig.cssls.setup{}
+lspconfig.html.setup{}
+lspconfig.gdscript.setup{}
