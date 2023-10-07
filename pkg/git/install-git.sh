@@ -21,5 +21,3 @@ check
 log "setting git settings"
 git config --global init.defaultBranch main
 check
-git config --global core.editor kak
-check
