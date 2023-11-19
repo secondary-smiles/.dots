@@ -1,3 +1,3 @@
 require("nvim-autopairs").setup {
-  disable_filetype = { "lisp" }
+  enable_check_bracket_line = false;
 }

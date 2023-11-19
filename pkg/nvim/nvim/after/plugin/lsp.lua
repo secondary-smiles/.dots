@@ -114,7 +114,6 @@ lspconfig.tsserver.setup {}
 lspconfig.svelte.setup {}
 lspconfig.rust_analyzer.setup {}
 lspconfig.pyright.setup {}
-lspconfig.marksman.setup {}
 lspconfig.elmls.setup {}
 lspconfig.zls.setup {}
 lspconfig.hls.setup {
@@ -122,7 +121,13 @@ lspconfig.hls.setup {
 }
 lspconfig.unison.setup {}
 lspconfig.perlls.setup {}
+
 lspconfig.ocamllsp.setup {}
 lspconfig.cssls.setup{}
 lspconfig.html.setup{}
 lspconfig.gdscript.setup{}
+
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+lspconfig.nixd.setup{}

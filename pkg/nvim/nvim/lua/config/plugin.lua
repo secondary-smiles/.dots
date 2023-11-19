@@ -10,15 +10,22 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
+  --use({
+  --  'neanias/everforest-nvim',
+  --  config = function()
+  --    require('everforest').setup({
+  --      background = 'soft',
+  --      italics = true,
+  --    })
+  --    vim.cmd('colorscheme everforest')
+  --  end,
+  --})
+
   use({
-    'neanias/everforest-nvim',
-    config = function()
-      require('everforest').setup({
-        background = 'soft',
-        italics = true,
-      })
-      vim.cmd('colorscheme everforest')
-    end,
+	'secondary-smiles/skull-vim',
+	config = function()
+    vim.cmd('colorscheme skull')
+	end
   })
 
   use {

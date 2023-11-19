@@ -18,10 +18,12 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>n", vim.cmd.bn)
-vim.keymap.set("n", "<leader>m", vim.cmd.bp)
-vim.keymap.set("n", "<leader>g", vim.cmd.bd)
+vim.keymap.set("n", "<leader>m", vim.cmd.bn)
+vim.keymap.set("n", "<leader>n", vim.cmd.bp)
+vim.keymap.set("n", "<leader>b", vim.cmd.bd)
 vim.keymap.set("n", "<leader>,", vim.cmd.buffers)
+
+vim.keymap.set("n", "<leader>km", vim.cmd.make)
 
 vim.keymap.set("n", "gh", "0")
 vim.keymap.set("n", "gl", "$")
